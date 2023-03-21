@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    primary:
+      jdbc-url: jdbc:postgresql://${db.primary.host}/${db.primary.database}?stringtype=unspecified
+      username: ${db.primary.username}
+      password: ${db.primary.password}
+      driver-class-name: org.postgresql.Driver
+    secondary:
+      jdbc-url: jdbc:postgresql://${db.secondary.host}/${db.secondary.database}?stringtype=unspecified
+      username: ${db.secondary.username}
+      password: ${db.secondary.password}
+      driver-class-name: org.postgresql.Driver
+      liquibase:
+        change-log: classpath:/changelog/migrations.xml
+        enabled: true
+  jpa:
+    show-sql: ${jpa.show-sql:true}
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate.order_by.default_null_ordering: last
