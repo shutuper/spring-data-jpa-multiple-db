@@ -45,7 +45,7 @@ public class PrimaryDataBaseDatabaseConfig {
 	@Primary
 	@Bean(name = "primaryDataBaseTransactionManager")
 	public JpaTransactionManager navierreTransactionManager(@Qualifier("primaryDataBaseEntityManagerFactory") final
-	                                                        LocalContainerEntityManagerFactoryBean entityManagerFactory) {
+															LocalContainerEntityManagerFactoryBean entityManagerFactory) {
 		return new JpaTransactionManager(Objects.requireNonNull(entityManagerFactory.getObject()));
 	}
 

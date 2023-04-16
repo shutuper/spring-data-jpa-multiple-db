@@ -17,7 +17,7 @@ import java.util.Objects;
 @Configuration
 @EnableJpaRepositories(
 		basePackageClasses = MultipleDbApplication.class,
-		transactionManagerRef = "secondaryTransactionManager",
+		transactionManagerRef = "secondaryDataBaseTransactionManager",
 		entityManagerFactoryRef = "secondaryEntityManagerFactory",
 		includeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = SecondaryRepository.class)
 )
@@ -38,9 +38,9 @@ public class SecondaryDatabaseConfig {
 				.build();
 	}
 
-	@Bean(name = "secondaryTransactionManager")
-	public JpaTransactionManager secondaryTransactionManager(@Qualifier("secondaryEntityManagerFactory") final
-	                                                        LocalContainerEntityManagerFactoryBean entityManagerFactory) {
+	@Bean(name = "secondaryDataBaseTransactionManager")
+	public JpaTransactionManager secondaryDataBaseTransactionManager(@Qualifier("secondaryEntityManagerFactory") final
+																	 LocalContainerEntityManagerFactoryBean entityManagerFactory) {
 		return new JpaTransactionManager(Objects.requireNonNull(entityManagerFactory.getObject()));
 	}
 
